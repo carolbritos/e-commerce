@@ -5,7 +5,8 @@ import { computed } from '@angular/core';
 import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
 import { effect } from '@angular/core';
 import { UpperCasePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { produtosService } from '../produtos.servise';
+import { inject} from "@angular/core";
 
 @Component({
   selector: 'app-lista-produtos',
@@ -40,28 +41,25 @@ export class ListaProdutos {
 
 // ======== MÉTODO HTTP CLINT (API) ============
 carregarProduto(){
- this.carregando.set(true);
- this.http.get<{title: string; price: number}[]>
- ('https://fakestoreapi.com/products').subscribe({
+this.carregando.set(true);
+this.produtosService.buscarProdutos().subscribe({
   next: (dados) => {
-    const produtosFormatados = dados.map(p => ({
-      nome: p.title,
-      preco: p.price,
-    }));
-    this.produtos.set(produtosFormatados);
+    const produtos = this.produtosService.transformarProdutos(dados);
+    this.produtos.set(produtos);
     this.carregando.set(false);
   },
   error: (erro) => {
-    console.error('Erro ao carregar produtos: ', erro);
+    console.error('Erro ao buscar produtos: ', erro);
     this.carregando.set(false);
   }
- });
+});
 }
 
 // ======== CONSTRUCTOR ================
-constructor(private http: HttpClient){
+constructor(){
     // Carrega a API
     this.carregarProduto();
+
     // Effects continuam iguais - não mexer
     effect(() =>{
       console.log('Lista de Produtos Alterados: ', this.produtos());
@@ -104,4 +102,9 @@ constructor(private http: HttpClient){
     console.log('Produto Selecionado: ', nome);
     this.produtoSelecionado.set(nome);
   }  
+
+// ======== INJECT =========
+
+private produtosService = inject(produtosService);
+
 }
