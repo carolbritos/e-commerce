@@ -12,8 +12,9 @@
 }
 @if(!carregando() && !erro()) {
     <p><strong>Quantidade de produtos:</strong> {{ totalProdutos() }}</p>
-    <hr>
-    @for(item of produtos(); track $index){
+
+    <section class="grid-produtos">
+     @for(item of produtos(); track $index){
         <app-produto
         [nome]="item.nome"
         [preco]="item.preco"
@@ -22,6 +23,7 @@
         >
         </app-produto>
     }
+    </section>
 }
 
 <!-- Carrinho -->
