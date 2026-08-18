@@ -40,6 +40,11 @@ export const routes: Routes = [
             import('./features/admin/admin/admin'). then((m) => m.Admin),
     },
     {
+        path: 'acesso-negado',
+        loadComponent: () =>
+            import('./features/acesso-negado/acesso-negado/acesso-negado').then((m) => m.AcessoNegado)
+    },
+    {
         path: '**',
         redirectTo: '',
     },
