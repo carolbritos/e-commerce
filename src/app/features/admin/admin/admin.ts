@@ -1,6 +1,6 @@
 import { Component, computed, signal, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthFacade } from '../../../core/facades/auth.facades';
 
 @Component({
   selector: 'app-adimin',
@@ -10,13 +10,13 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class Admin {
   private router = inject(Router);
-  private authService = inject(AuthService);
+  private authFacade = inject(AuthFacade);
 
   totalProdutosCadastrados = signal(20);
   pedidosPendentes = signal(6);
   usuariosCadastrados = signal(7);
 
-  usuarioAtual = this.authService.usuarioAtual;
+  usuarioAtual = this.authFacade.usuarioAtual;
 
   areaPefil = computed(() =>{
     const usuario = this.usuarioAtual();
@@ -28,7 +28,7 @@ export class Admin {
   });
 
   sair(){
-    this.authService.logout();
+    this.authFacade.sair();
     this.router.navigateByUrl('/login');
   }
 }

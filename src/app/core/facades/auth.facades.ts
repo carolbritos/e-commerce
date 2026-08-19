@@ -3,7 +3,7 @@ import { AuthService } from "../services/auth.service";
 
 @Injectable({providedIn: 'root'})
 
-export class AuthFadade {
+export class AuthFacade {
 
     private authService = inject(AuthService)
 

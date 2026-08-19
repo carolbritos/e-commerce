@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthFacade } from '../../../core/facades/auth.facades';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +11,7 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class Login {
 
-  authService = inject(AuthService);
+  authfacade = inject(AuthFacade);
   router = inject(Router);
 
   erroLogin = signal(false);
@@ -32,14 +32,14 @@ export class Login {
     const email = this.formulario.value.email ?? '';
     const senha = this.formulario.value.senha ?? '';
 
-    const loginFinalizado = this.authService.login(email, senha);
+    const loginFinalizado = this.authfacade.realizarLogin(email, senha);
 
     if(!loginFinalizado){
       this.erroLogin.set(true);
       return;
     }
 
-    if(this.authService.admin()){
+    if(this.authfacade.admin()){
       this.router.navigateByUrl('/admin');
       return;
     }
