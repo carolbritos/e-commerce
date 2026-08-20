@@ -3,10 +3,13 @@ mat-toolbar {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.5rem;
+  background-color: #e91e63;
+  color: #fff;
 }
 
 .flex-space {
   flex: 1 1 auto;
+  color: #fff
 }
 
 .email-usuario {

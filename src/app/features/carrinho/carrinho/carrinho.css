@@ -1,0 +1,25 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    margin: 10px;
+}
+
+.acoes-carrinho button {
+    margin: 10px;
+}
+
+.acoes-carrinho {
+    margin: 25px;
+}
+
+.btn-confirmar {
+    background-color: #329932;
+    color: #fff;
+}
+
+.btn-cancelar {
+    background-color: #ff3232;
+    color: #fff;
+}

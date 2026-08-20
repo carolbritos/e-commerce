@@ -2,10 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facades';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-checkout',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatButtonModule, RouterLink],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
@@ -20,6 +22,7 @@ export class Checkout {
     email: new FormControl('',[Validators.required, Validators.email]),
     endereco: new FormControl('',[Validators.required, Validators.minLength(5)]),
   });
+item: any;
 
   finalizar(){
 

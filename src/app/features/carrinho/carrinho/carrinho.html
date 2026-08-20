@@ -9,7 +9,7 @@
         <section class="lista-carrinho">
      @for(item of carrinhoFacade.itensCarrinho(); track $index){
         <article class="item-carrinho">
-            <div>
+            <div class="item">
                 <p><strong>{{item.nome}}</strong></p>
                 <p>R$ {{item.preco.toFixed(2)}}</p>
                 <button mat-stroked-button color="warn" type="button" 
@@ -23,11 +23,12 @@
             <h3>Resumo da compra</h3>
             <p><strong>Itens do carrinho: </strong>{{carrinhoFacade.quantidadeCarrinho()}}</p>
             <p><strong>Total: </strong>{{carrinhoFacade.totalCarrinho()}}</p>
+            <hr>
         </section>
         <section class="acoes-carrinho">
             <button mat-raised-button color="primary" type="button" (click)="limparCarrinho()">Limpar carrinho</button>
             <button mat-raised-button color="primary" type="button" routerLink="/produtos">Ver produtos</button>
-            <button mat-raised-button class="btn-confirmar" type="button" routerLink="checkout">Finalizar compra</button>
+            <button mat-raised-button class="btn-confirmar" type="button" routerLink="/checkout">Finalizar compra</button>
             <button mat-raised-button class="btn-cancelar" type="button" (click)="cancelarCompra()">Cancelar compra</button>
         </section>
     }
