@@ -1,17 +1,25 @@
 mat-toolbar {
-display: flex;
-flex-direction: wrap;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .flex-space {
-flex:1 1 auto;
+  flex: 1 1 auto;
 }
 
-button {
-    margin-left: 8px;
+.email-usuario {
+  font-size: 1rem;
+  color: var(--mat-sys-tertiary, rebeccapurple);
 }
 
-.email-usuario{
-    font-size: 16px;
-    color: rebeccapurple;
+/*
+ * Decorative accent bar. Currently not referenced by header.html —
+ * either wire it up in the template or remove this rule to avoid dead CSS.
+ */
+.barra-magenta {
+  width: 100%;
+  height: 6.25rem;
+  background-color: var(--mat-sys-primary, #c218a8);
 }
