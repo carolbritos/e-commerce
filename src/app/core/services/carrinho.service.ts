@@ -1,33 +1,65 @@
-import {Injectable, signal, computed} from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Injectable, signal, computed, effect, inject, PLATFORM_ID } from '@angular/core';
+
 import { ItemCarrinho } from '../models/item-carrinho';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class CarrinhoService {
+  private platformId = inject(PLATFORM_ID);
+  private readonly chaveStorage = 'minha-loja-carrinho';
+  private carrinho = signal<ItemCarrinho[]>(this.carregarCarrinhoSalvo());
 
-// Estado Global
-private carrinho = signal<ItemCarrinho[]>([]);
+  // SELECTORS
+  itens = computed(() => this.carrinho());
+  quantidadeItens = computed(() => this.carrinho().length);
+  totalItens = computed(() => this.carrinho().reduce((total, item) => total + item.preco, 0));
+  carrinhoVazio = computed(() => this.carrinho().length === 0);
 
-// Seleções
-itens = computed(() => this.carrinho());
-quantidadeItens = computed(() => this.carrinho().length);
-totalItens = computed(() => 
-this.carrinho().reduce((total, item) => total + item.preco,0));
-carrinhoVazio = computed(() => this.carrinho().length === 0);
+  constructor() {
+    // Sempre que o carrinho mudar, a lista atualizada será persistida.
+    effect(() => {
+      this.salvarCarrinho(this.carrinho());
+    });
+  }
 
-// TODO: Ação Adicionar Produtos
-adicionar(produto: ItemCarrinho){
-    this.carrinho.update(lista => [...lista, produto]);
-}
-// TODO: Ação de Limpeza
-limpar() {
+  // ACTIONS
+  adicionar(produto: ItemCarrinho) {
+    this.carrinho.update((lista) => [...lista, produto]);
+  }
+
+  removerItem(rmvItem: number) {
+    this.carrinho.update((listaAtual) => listaAtual.filter((_, index) => index !== rmvItem));
+  }
+
+  limpar() {
     this.carrinho.set([]);
-}
+  }
 
-removerItem(rmvItem:number){
-    this.carrinho.update((listaAtual) =>
-    listaAtual.filter((_, index) => index !== rmvItem));
-}
+  private estaNoNavegador(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
+
+  private carregarCarrinhoSalvo(): ItemCarrinho[] {
+    if (!this.estaNoNavegador()) {
+      return [];
+    }
+    const dadosSalvos = localStorage.getItem(this.chaveStorage);
+    if (!dadosSalvos) {
+      return [];
+    }
+    try {
+      return JSON.parse(dadosSalvos) as ItemCarrinho[];
+    } catch {
+      return [];
+    }
+  }
+
+  private salvarCarrinho(itens: ItemCarrinho[]) {
+    if (!this.estaNoNavegador()) {
+      return;
+    }
+    localStorage.setItem(this.chaveStorage, JSON.stringify(itens));
+  }
 }

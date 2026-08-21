@@ -16,7 +16,7 @@
         <h3>Resumo da compra</h3>
 
         <p><strong>Itens do carrinho</strong>{{carrinhoFacade.quantidadeCarrinho()}}</p>
-        <p><strong>Total: </strong>R$ {{item.preco.toFixed(2)}}</p>
+        <p><strong>Total: </strong> {{carrinhoFacade.totalCarrinho()}}</p>
         <button mat-stroked-button color="primary" 
         type="button" routerLink="/carrinho">Revisar carrinho</button>
     </section>

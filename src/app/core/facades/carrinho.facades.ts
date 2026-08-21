@@ -23,5 +23,4 @@ export class CarrinhoFacade {
     removerItem(rmvItem: number){
         this.carrinhoService.removerItem(rmvItem);
     }
-
 }
