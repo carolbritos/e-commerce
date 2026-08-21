@@ -5,10 +5,11 @@ import { RouterLink, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { CarrinhoFacade } from '../../../core/facades/carrinho.facades';
 import { AuthFacade } from '../../../core/facades/auth.facades';
+import { UpperCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [MatToolbarModule, MatButtonModule, RouterLink],
+  imports: [MatToolbarModule, MatButtonModule, RouterLink, UpperCasePipe],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
