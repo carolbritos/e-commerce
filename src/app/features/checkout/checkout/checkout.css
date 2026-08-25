@@ -1,0 +1,67 @@
+.pagina-ckeckout {
+    max-width: 700px;
+}
+
+.pedido-finalizado {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px;
+    margin: 16px 0;
+}
+
+.carrinho-vazio{
+    border-color: #f3b7b7;
+    background-color: #fff5f5;
+    text-align: center;
+}
+
+.carrinho-vazio h3 {
+    color: red;
+    font-weight: bold;
+}
+
+.carrinho-vazio p {
+    color: red;
+}
+
+.carrinho-vazio button {
+    color: #fff;
+    background-color: red;
+}
+
+.compra-resumo {
+    border-color: #b7e4c7;
+    background-color: #f1fff5;
+    text-align: center;
+}
+
+.compra-resumo p {
+    font-weight: bold;
+}
+
+.compra-resumo button {
+    background-color: #b7e4c7;
+    color: green;
+}
+
+form {
+    max-width: 500px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+small {
+    display: block;
+    color: red;
+    margin-bottom: 8px;
+}
+
+button{
+    margin-right: 8px;
+    margin-top: 8px;
+    text-align: center;
+}

@@ -1,3 +1,5 @@
+<section class="paniga-chekout">
+
 <h2>Checkout</h2>
 
 @if (pedidoFinalizado()){
@@ -18,7 +20,7 @@
 
 @if(carrinhoFacade.carrinhoVazio() && !pedidoFinalizado()){
     <section class="carrinho-vazio">
-    <h3>>Seu carrinho está vazio!</h3>
+    <h3>Seu carrinho está vazio!</h3>
     <p >Adicionar Produtos antes de finalizar a compra.</p>
     <button mat-raised-button color="primary" type="button" 
     routerLink="/produtos">Ver produtos</button>
@@ -29,7 +31,7 @@
         <h3>Resumo da compra</h3>
 
         <p><strong>Itens do carrinho</strong>{{carrinhoFacade.quantidadeCarrinho()}}</p>
-        <p><strong>Total: </strong> {{carrinhoFacade.totalCarrinho()}}</p>
+        <p>Total: {{carrinhoFacade.totalCarrinho()}}</p>
         <button mat-stroked-button color="primary" 
         type="button" routerLink="/carrinho">Revisar carrinho</button>
     </section>
@@ -83,3 +85,6 @@
 
 }
 
+
+
+</section>

@@ -1,17 +1,31 @@
+<section class="pagina-produto">
+<header class="cabecalho-produtos">
+<div>
 <h2>Produtos</h2>
-
-<!-- Estado 1: Carregando -->
+<p>Escolha os produtos e adicione-os ao carrinho.</p>      
+</div>
+<button mat-raised-button color="primary"
+type="button" routerLink="/produto">Ver carrinho ({{carrinhoFacade.quantidadeCarrinho()}})</button>
+</header>
 @if(carregando()){
     <p><strong>Carregando produtos, Aguarde...</strong></p>
 }
 
-<!-- Estado 2: Erro -->
 @if(erro()){
-    <p><strong style="color: red;">{{erro() }}</strong></p>
-    <button (click)="carregarProduto()">Tente novamente</button>
+<section class="messagem-erro">
+<p><strong>{{erro() }}</strong></p>
+<button mat-raised-button (click)="carregarProduto()">Tente novamente</button>
+</section>
 }
+
 @if(!carregando() && !erro()) {
-    <p><strong>Quantidade de produtos:</strong> {{ totalProdutos() }}</p>
+
+<section class="resumo-produtos">
+<p><strong>Total de produtos:</strong> {{ totalProdutos() }}</p>
+<p><strong>Valor total do Catálogo: </strong> {{valorTotalFormatado()}} </p>
+</section>
+
+<hr>
 
     <section class="grid-produtos">
      @for(item of produtos(); track $index){
@@ -25,6 +39,23 @@
     }
     </section>
 }
+
+<hr>
+<section class="produto-selecionado">
+    <h3>Produto Selecionado</h3>
+    @if (produtoSelecionado()) {
+        <p class="texto-sucesso"> {{produtoSelecionado()}} </p>
+    }@else {
+        <p class="texto-neutro">Nenhum protudo selecionado</p>
+    }
+
+</section>
+</section>
+
+
+<!-- Estado 2: Erro -->
+
+
 
 <!-- <h2>
     Produto selecionado:
