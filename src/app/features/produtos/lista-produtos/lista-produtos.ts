@@ -62,6 +62,8 @@ this.produtosService.buscarProdutos().subscribe({
 // ======== CONSTRUCTOR ================
 constructor(){
 
+  this.carregarProduto();
+
     effect(() =>{
       if (typeof document !== 'undefined'){
         document.title = `(${this.totalProdutos()}) - Loja da Carol`;
