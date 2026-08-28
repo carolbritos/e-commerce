@@ -1,9 +1,10 @@
-import { Component,Input,Output,EventEmitter } from '@angular/core';
+import { Component,Input,Output,EventEmitter, inject } from '@angular/core';
   import{ UpperCasePipe, CurrencyPipe } from '@angular/common';
   import { PrecoFormatadoPipe } from '../../../shared/pipes/preco-formatado-pipe';
   import { MatButtonModule } from '@angular/material/button';
   import { MatCardModule } from '@angular/material/card';
   import { ItemCarrinho } from '../../../core/models/item-carrinho';
+  import { FavoritosFacade } from '../../../core/facades/favoritos.facade';
   
 @Component({
   selector: 'app-produto',
@@ -27,4 +28,21 @@ export class Produto {
       preco: this.preco,
     });
   }
+
+private favoritosFacade = inject(FavoritosFacade);
+
+favoritar() {
+  if (this.favoritosFacade.estaFavoritado(this.nome)) {
+    this.favoritosFacade.removerFavorito(this.nome);
+  } else {
+    this.favoritosFacade.adicionarFavorito(this.nome);
+  }
 }
+
+estaFavoritado(): boolean {
+  return this.favoritosFacade.estaFavoritado(this.nome);
+}
+
+}
+
+

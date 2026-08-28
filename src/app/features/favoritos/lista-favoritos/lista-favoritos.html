@@ -1,0 +1,50 @@
+<section class="pagina-favoritos">
+
+    <header class="cabecalho-favoritos">
+        <div>
+            <h2>Meus Favoritos</h2>
+            <p>Produtos que você salvou como favoritos.</p>
+        </div>
+
+        <button
+            mat-raised-button color="primary" type="button" routerLink="/produtos">
+            Ver produtos
+        </button>
+    </header>
+
+    @if (favoritosFacade.favoritos().length === 0) {
+
+        <section class="favoritos-vazio">
+            <h3>Nenhum favorito salvo</h3>
+            <p>Você ainda não adicionou nenhum produto aos favoritos.</p>
+
+            <button
+                mat-raised-button color="primary" type="button" routerLink="/produtos">
+                Escolher produtos
+            </button>
+        </section>
+
+    } @else {
+
+        <section class="lista-favoritos">
+
+            @for (favorito of favoritosFacade.favoritos(); track favorito.nome) {
+
+                <article class="favorito-card">
+
+                    <h3>{{ favorito.nome }}</h3>
+
+                    <button
+                        mat-stroked-button color="warn" type="button" (click)="removerFavorito(favorito.nome)">
+                        ♥ Remover dos favoritos
+                    </button>
+
+                </article>
+
+            }
+
+        </section>
+
+    }
+
+</section>

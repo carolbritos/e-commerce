@@ -16,6 +16,11 @@
     <button mat-stroked-button color="accent" (click)="adicionarAoCarrinho()">
         Adicionar ao Carrinho
     </button>
+
+    <button mat-stroked-button color="warn" type="button" (click)="favoritar()">
+            {{ estaFavoritado() ? '♥ Favoritado' : '♡ Favoritar' }}
+    </button>
+
     </mat-card-actions>
     
 </mat-card>
